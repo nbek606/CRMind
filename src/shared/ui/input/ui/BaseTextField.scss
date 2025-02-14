@@ -1,0 +1,37 @@
+.base__text-field {
+  padding-bottom: 20px;
+
+  width: 100%;
+
+  .MuiInputLabel-outlined {
+
+  }
+
+  .MuiFormControl-root {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .MuiInputBase-root {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: $base-font-family;
+  }
+  .MuiFormLabel-root {
+    font-family: $base-font-family;
+  }
+
+  .MuiInputBase-input {
+    width: 100%;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+
+  .css-113d811-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+    color: $primary-color;
+  }
+
+  .css-113d811-MuiFormLabel-root-MuiInputLabel-root.Mui-error {
+    color: $red-color;
+  }
+}
