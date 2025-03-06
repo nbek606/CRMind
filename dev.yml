@@ -2,7 +2,6 @@ version: "3.9"
 services:
   frontend:
     image: ${$CI_REGISTRY_IMAGE}:front-${$TAG}
-    command: ["npm", "run", "build"]
     tty: true
     build: .
     env_file:
