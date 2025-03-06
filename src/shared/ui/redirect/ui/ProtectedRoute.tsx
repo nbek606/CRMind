@@ -14,11 +14,11 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children, path }) => {
     const token = useAppSelector(state => state.auth.token)
 
     useEffect(() => {
-        if (token && (path === ROUTES.LOGIN || path === ROUTES.REGISTER)) {
+        if (token && (path === ROUTES.LOGIN)) {
             navigate(ROUTES.HOME)
         }
 
-        if (!token && path !== ROUTES.REGISTER) {
+        if (!token && path) {
             navigate(ROUTES.LOGIN);
         }
     }, [token, navigate, location.pathname]);

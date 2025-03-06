@@ -1,1 +1,0 @@
-export {RegisterWidget} from "./RegisterWidget.tsx";

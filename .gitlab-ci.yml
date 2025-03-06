@@ -37,4 +37,9 @@ deploy:
   image: docker:latest
   script:
     - echo "Запуск скрипта развертывания...
-    - docker
+    - docker stack deploy -c dev.yml --with-registry-auth users_stack
+  tags:
+    - dev
+  only:
+    - dev
+  environment: dev

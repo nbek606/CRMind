@@ -13,9 +13,5 @@ export const routesList = [
     {
         path: ROUTES.LOGIN,
         element: lazy(() => import('@/pages/login'))
-    },
-    {
-        path: ROUTES.REGISTER,
-        element: lazy(() => import('@/pages/register'))
     }
 ];
