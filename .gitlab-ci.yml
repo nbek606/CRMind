@@ -10,7 +10,6 @@ variables:
 
 build:dev:
   stage: build
-  image: node:18
   script:
     - docker build -t $CI_REGISTRY_IMAGE:frontend-$TAG .
     - docker push $CI_REGISTRY_IMAGE:frontend-$TAG
