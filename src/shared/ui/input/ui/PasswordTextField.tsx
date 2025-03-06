@@ -1,38 +1,35 @@
-import {InputAdornment, IconButton} from "@mui/material";
-import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {FC, useState} from "react";
-import './BaseTextField.scss';
-import {BaseTextField} from "@/shared/ui/input";
-import {THtmlEvent} from "@/shared/model/HTMLTypes";
+import {TextField, InputAdornment, IconButton} from "@mui/material";
+import {ChangeEvent, forwardRef, useState} from "react";
+import "./BaseTextField.scss";
+import {VisibilityOff, Visibility} from "@mui/icons-material";
 
 interface IBaseTextField {
     label?: string,
     placeholder?: string,
-    onInput?: (event: THtmlEvent) => void,
-    name: string,
+    error?: boolean,
+    helperText?: string,
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const PasswordTextField: FC<IBaseTextField> = ({placeholder, label, onInput, name}) => {
+export const PasswordTextField = forwardRef<HTMLInputElement, IBaseTextField>(({ placeholder, label, error,helperText,onChange, ...rest}, ref) => {
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
 
-    const changePasswordVisible = () => setPasswordVisible(!passwordVisible)
-
     return (
-        <div className="password__text-field">
-            <BaseTextField
+        <div className="base__text-field">
+            <TextField
                 placeholder={placeholder}
-                variant="outlined"
                 label={label}
-                type={passwordVisible ? "password" : "text"}
-                onInput={onInput}
-                name={name}
-                required={true}
+                ref={ref}
+                type={ passwordVisible ? 'text' : 'password' }
+                error={!!error}
+                helperText={helperText}
+                onChange={onChange}
                 slotProps={
                     {
                         input: {
                             endAdornment: (
                                 <InputAdornment position="end">
-                                    <IconButton onClick={changePasswordVisible}>
+                                    <IconButton onClick={() => setPasswordVisible(!passwordVisible)}>
                                         { passwordVisible ? <VisibilityOff /> : <Visibility /> }
                                     </IconButton>
                                 </InputAdornment>
@@ -40,7 +37,8 @@ export const PasswordTextField: FC<IBaseTextField> = ({placeholder, label, onInp
                         }
                     }
                 }
+                {...rest}
             />
         </div>
     )
-}
+});

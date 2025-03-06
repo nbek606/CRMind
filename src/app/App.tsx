@@ -1,5 +1,6 @@
-import {BrowserRouter, Routes, Route} from 'react-router';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {routesList} from "./routes";
+import {ProtectedRoute} from "@/shared/ui/redirect";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
                         <Route
                             key={route.path}
                             path={route.path}
-                            element={<route.element />}
+                            element={<ProtectedRoute path={route.path}>{<route.element/>}</ProtectedRoute>}
                         />
                     )
                 }

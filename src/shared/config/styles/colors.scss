@@ -1,6 +1,22 @@
 $primary-color: #0065FF;
+$black-color:#2D2D2F;
 $white-color: #fff;
-$red-color: #f20;
-$green-color: #2e7d32;
-$light-grey-color: #e8e8e8;
-$dark-grey-color: #696969
+$red-color: #FF2D87;
+$green-color: #58CF18;
+$light-grey-color: #F0F4FB;
+$dark-grey-color: #727280;
+$orange-color: #FFA601;
+$pink-color: #FF7CB4;
+$pale-color: #AEC2EA;
+
+$colors: (
+        primary: $primary-color,
+        black: $black-color,
+        white: $white-color,
+        red: $red-color,
+        green: $green-color,
+        light: $light-grey-color,
+        dark: $dark-grey-color,
+        orange: $orange-color,
+        pink: $pink-color
+)

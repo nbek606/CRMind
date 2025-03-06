@@ -1,50 +1,37 @@
 import {TextField} from "@mui/material";
-import {forwardRef} from "react";
+import {ChangeEvent, forwardRef, memo} from "react";
 import "./BaseTextField.scss";
-import {THtmlEvent} from "@/shared/model/HTMLTypes";
 
-interface IBaseTextField {
+type TBaseTextField = {
     label?: string,
     placeholder?: string,
-    variant?: 'outlined' | 'standard' | 'filled',
-    type?: 'text' | 'password' | 'number',
-    onInput?: (event: THtmlEvent) => void,
-    onBlur?: (event: THtmlEvent) => void,
-    name: string,
-    required?: boolean,
+    error?: boolean,
+    helperText?: string,
     value?: string,
-    slotProps?: object,
-    error?: string,
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const BaseTextField = forwardRef<HTMLInputElement, IBaseTextField>(({
+export const BaseTextField = memo(forwardRef<HTMLInputElement, TBaseTextField>(({
     placeholder,
-    variant = 'outlined',
     label,
-    type = 'text',
-    onInput,
-    name,
-    required,
+    error,
+    helperText,
+    onChange,
     value,
-    slotProps,
-    error
+    ...rest
 }, ref) => {
     return (
         <div className="base__text-field">
             <TextField
-                ref={ref}
                 placeholder={placeholder}
-                variant={variant}
                 label={label}
-                type={type}
-                onChange={onInput}
-                name={name}
-                required={required}
-                value={value}
-                slotProps={slotProps}
+                ref={ref}
                 error={!!error}
-                helperText={error}
+                helperText={helperText}
+                onChange={onChange}
+                value={value}
+                {...rest}
             />
         </div>
     )
-});
+}));

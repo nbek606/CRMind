@@ -5,13 +5,14 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000
+    port: 3000,
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
     },
   },
+
   css: {
     preprocessorOptions: {
       scss: {

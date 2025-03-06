@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import type {THtmlEvent} from '@/shared/model/HTMLTypes';
+import type {THtmlEvent} from '@/shared/model';
 
 interface IValidations {
     minLength?: number,
@@ -12,7 +12,7 @@ export interface IReturnUseInput {
     onBlur: () => void,
     isDirty: boolean,
     minLength?: number,
-    isEmpty?: boolean
+    isEmpty: boolean
 }
 
 export const useInput = (initialValue: string, validations: IValidations): IReturnUseInput => {
@@ -47,7 +47,7 @@ export const useValidation = (value: string, validations: IValidations) => {
                 case "isEmpty":
                     if (value) {
                         setEmpty(false)
-                    } else {
+                    } else if (validations[validation]){
                         setEmpty(true)
                     }
                     break;
@@ -60,7 +60,7 @@ export const useValidation = (value: string, validations: IValidations) => {
                     break;
             }
         }
-    }, [value])
+    }, [value, validations])
 
     return {
         isEmpty,

@@ -1,41 +1,80 @@
-import { useForm } from "react-hook-form";
-import {BaseTextField} from "@/shared/ui/input";
-import {useState} from "react";
+import './AuthForm.scss';
+import {BaseTextField, PasswordTextField} from "@/shared/ui/input";
+import {BaseTitle} from "@/shared/ui/label";
+import {BaseButton} from "@/shared/ui/button";
+import {useForm} from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {schema} from "@/features/auth/helpers/constants.ts";
+import {z} from "zod";
+import {fetchAuthApi} from "../model";
+import {useAppDispatch, useAppSelector} from "@/app/hooks/redux.ts";
+import {Alert} from "@mui/material";
+import {FC} from "react";
 
-interface IFormData {
-    email: string,
-    password: string
+interface IAuthFormProps {
+    onShowRegister: () => void
 }
 
-export const AuthForm = ()=> {
+export const AuthForm: FC<IAuthFormProps> = ({ onShowRegister })=> {
+    const dispatch = useAppDispatch()
+    const {error, isLoading} = useAppSelector(state => state.auth)
     const {
         register,
+        handleSubmit,
         formState: {errors},
-        handleSubmit
-    } = useForm<IFormData>()
+    } = useForm<FormData>({
+        resolver: zodResolver(schema)
+    })
 
-    const [formData, setFormData] = useState<IFormData>({ email: "", password: "" });
+    type FormData = z.infer<typeof schema>
 
-    const handleInputChange = (field: keyof IFormData, value: string) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
-        console.log("Обновлённые данные:", formData);
-    };
-
-    const onSubmit = (data: IFormData) => {
-        console.log("Форма отправлена:", data);
-    };
+    const onSubmit = (data: FormData) => {
+        dispatch(fetchAuthApi(data))
+    }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-           <BaseTextField
-               label="Email"
-               {...register("email", { required: false })}
-               error={errors.email?.message}
-               onInput={(e) => handleInputChange("email", e.target.value)}
-           />
+        <div className="auth">
+            <div className="auth__form">
+                <div className="auth__form-header">
+                    <BaseTitle text="Вход"/>
+                    <div className="auth__form-no__account">
+                     <span>
+                        Еще нет аккаунта?
+                     </span>
+                        <a onClick={onShowRegister}>
+                            Зарегистрироваться
+                        </a>
+                    </div>
+                </div>
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                >
+                    <BaseTextField
+                        label="Email"
+                        {...register("username")}
+                        error={!!errors.username}
+                        helperText={errors.username?.message}
+                    />
+                    <PasswordTextField
+                        label="Пароль"
+                        {...register("password")}
+                        error={!!errors.password}
+                        helperText={errors.password?.message}
+                    />
 
-
-            <input type="submit" />
-        </form>
+                    <BaseButton
+                        title="Войти"
+                        type="submit"
+                        loading={isLoading}
+                    />
+                    {
+                        error &&
+                        <Alert severity="error">
+                            {error}
+                        </Alert>
+                    }
+                </form>
+            </div>
+        </div>
     )
 }

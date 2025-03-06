@@ -1,0 +1,33 @@
+.register {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $pale-color;
+
+  &__form {
+    width: 500px;
+    padding: 40px;
+    background-color: $white-color;
+    border-radius: 10px;
+  }
+
+  &__header {
+    &-title {
+      padding-bottom: 20px;
+    }
+  }
+
+  &__buttons {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+
+      svg {
+        color: $primary-color;
+        font-size: 30px;
+        cursor: pointer;
+      }
+  }
+}

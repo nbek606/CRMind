@@ -8,21 +8,32 @@ interface IBaseButton {
     color?: 'error' | 'success' | 'primary',
     disabled?: boolean,
     onClick?: (test: string) => void;
-    type?: 'button' | 'submit'
+    type?: 'button' | 'submit',
+    loading?: boolean
 }
 
-export const BaseButton: FC<IBaseButton> = ({title, variant="contained", color="primary", disabled = false, onClick, type='button'}) => {
-    return (
-        <div className="base__button">
-            <Button
-                variant={variant}
-                color={color}
-                disabled={disabled}
-                onClick={() => onClick ? onClick('type'): () => {}}
-                type={type}
-            >
-                {title}
-            </Button>
-        </div>
-    )
+export const BaseButton: FC<IBaseButton> = (
+    {
+        title,
+        variant="contained",
+        color="primary",
+        disabled = false,
+        onClick,
+        type='button',
+        loading = false
+    }) => {
+        return (
+            <div className="base__button">
+                <Button
+                    variant={variant}
+                    color={color}
+                    disabled={disabled}
+                    onClick={() => onClick ? onClick('type'): () => {}}
+                    type={type}
+                    loading={loading}
+                >
+                    {title}
+                </Button>
+            </div>
+        )
 }

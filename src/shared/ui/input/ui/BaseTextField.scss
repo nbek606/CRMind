@@ -3,6 +3,10 @@
 
   width: 100%;
 
+  .MuiFormHelperText-root {
+    margin-left: 0;
+  }
+
   .MuiInputLabel-outlined {
 
   }
@@ -16,6 +20,7 @@
     width: 100%;
     box-sizing: border-box;
     font-family: $base-font-family;
+    background-color: $light-grey-color;
   }
   .MuiFormLabel-root {
     font-family: $base-font-family;
