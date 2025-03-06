@@ -11,7 +11,6 @@ cache:
     - node_modules/
 
 variables:
-  IMAGE_NAME: 1.0
   TAG: $CI_COMMIT_REF_SLUG-$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA
 
 install:
@@ -29,7 +28,7 @@ build:
   script:
     - npm ci
     - npm run build
-    - docker build -t front-$IMAGE_NAME-$TAG .
+    - docker build -t $CI_REGISTRY_IMAGE:front-NAME-$TAG .
     - docker push $CI_REGISTRY_IMAGE:front-$TAG
 
   artifacts:
