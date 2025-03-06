@@ -1,7 +1,6 @@
 version: "3.9"
 services:
   frontend:
-    image: $CI_REGISTRY_IMAGE:frontend-$TAG
     env_file:
       - .env.development
     ports:
