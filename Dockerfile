@@ -1,27 +1,21 @@
-# Используем официальный Node.js образ
 FROM node:18 AS build
 
-# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем package.json и устанавливаем зависимости
 COPY package*.json ./
+
 RUN npm install
 
-# Копируем весь проект
 COPY . .
 
-# Строим проект
 RUN npm run build
 
-# Используем nginx для раздачи статичных файлов
 FROM nginx:alpine
 
-# Копируем билд из предыдущего шага
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Экспонируем порт 80
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
 
-# Настроим Nginx для SPA
 CMD ["nginx", "-g", "daemon off;"]
