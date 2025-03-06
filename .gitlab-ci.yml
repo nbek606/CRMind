@@ -2,7 +2,6 @@ before_script:
   - docker login --username $CI_REGISTRY_USER --password $CI_REGISTRY_PASSWORD
 
 stages:
-  - install
   - build
   - deploy
 
@@ -27,6 +26,7 @@ build:
   stage: build
   image: node:18
   script:
+    - npm ci
     - npm run build
   artifacts:
     paths:
@@ -36,7 +36,7 @@ deploy:
   stage: deploy
   image: docker:latest
   script:
-    - echo "Запуск скрипта развертывания...
+    - echo "Запуск скрипта развертывания..."
     - docker stack deploy -c dev.yml --with-registry-auth users_stack
   tags:
     - dev
