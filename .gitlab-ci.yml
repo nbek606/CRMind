@@ -1,13 +1,21 @@
 before_script:
   - docker login --username $CI_REGISTRY_USER --password $CI_REGISTRY_PASSWORD
 
-variables:
-  CI_REGISTRY_IMAGE: "$CI_REGISTRY/$CI_PROJECT_PATH"
-
 stages:
   - build
   - deploy
 
+variables:
+  TAG: $CI_COMMIT_REF_SLUG-$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA
+
+install:
+  stage: install
+  image: node:18
+  script:
+    - npm ci
+  artifacts:
+    paths:
+      - node_modules/
 
 build:dev:
   stage: build
@@ -16,9 +24,8 @@ build:dev:
     - npm ci
     - npm run build
     - echo $CI_REGISTRY_IMAGE
-    - echo $TAG
-    - docker build -t $CI_REGISTRY_IMAGE:frontend .
-    - docker push $CI_REGISTRY_IMAGE:frontend
+    - docker build -t $CI_REGISTRY_IMAGE:frontend-$TAG .
+    - docker push $CI_REGISTRY_IMAGE:frontend-$TAG
   artifacts:
     paths:
       - build/
