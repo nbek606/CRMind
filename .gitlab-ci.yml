@@ -40,7 +40,7 @@ deploy:
   image: docker:latest
   script:
     - echo "Запуск скрипта развертывания..."
-    - docker stack deploy -c dev.yml --with-registry-auth crm_mind_stack
+    - docker stack deploy -c dev.yml --with-registry-auth frontend_stack
   tags:
     - dev
   only:
