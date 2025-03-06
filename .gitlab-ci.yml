@@ -23,8 +23,8 @@ build:dev:
   script:
     - npm ci
     - npm run build
-    - docker build -t $CI_REGISTRY_IMAGE:frontend-$TAG .
-    - docker push $CI_REGISTRY_IMAGE:frontend-$TAG
+    - docker build -t frontend .
+    - docker push frontend
   artifacts:
     paths:
       - build/
