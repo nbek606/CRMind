@@ -8,26 +8,12 @@ stages:
 variables:
   TAG: $CI_COMMIT_REF_SLUG-$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA
 
-install:
-  stage: install
-  image: node:18
-  script:
-    - npm ci
-  artifacts:
-    paths:
-      - node_modules/
-
 build:dev:
   stage: build
   image: node:18
   script:
-    - npm ci
-    - npm run build
-    - docker build -t frontend .
-    - docker push frontend
-  artifacts:
-    paths:
-      - build/
+    - docker build -t $CI_REGISTRY_IMAGE:frontend-$TAG .
+    - docker push $CI_REGISTRY_IMAGE:frontend-$TAG
   tags:
     - dev
   only:
@@ -36,7 +22,6 @@ build:dev:
 
 deploy:
   stage: deploy
-  image: docker:latest
   script:
     - echo "Запуск скрипта развертывания..."
     - docker stack deploy -c dev.yml --with-registry-auth frontend_stack
