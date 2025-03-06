@@ -38,7 +38,7 @@ export const RegisterForm: FC<IRegisterFormProps> = ({onShowAuth}) => {
                 <div className="register__header">
                     <div className="register__header">
                         <div className="register__header-title">
-                            <BaseTitle text="Регистрация"/>
+                            <BaseTitle text="Регистрация Нурлана"/>
                         </div>
                     </div>
                 </div>
