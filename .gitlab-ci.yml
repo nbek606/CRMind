@@ -3,7 +3,6 @@ before_script:
 
 variables:
   CI_REGISTRY_IMAGE: "$CI_REGISTRY/$CI_PROJECT_PATH"
-  TAG: $CI_COMMIT_REF_SLUG-$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA
 
 stages:
   - build
