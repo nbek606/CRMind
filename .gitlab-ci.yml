@@ -11,6 +11,7 @@ cache:
     - node_modules/
 
 variables:
+  IMAGE_NAME: 1.0
   TAG: $CI_COMMIT_REF_SLUG-$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA
 
 install:
@@ -28,6 +29,9 @@ build:
   script:
     - npm ci
     - npm run build
+    - docker build -t front-$IMAGE_NAME-$TAG .
+    - docker push $CI_REGISTRY_IMAGE:front-$TAG
+
   artifacts:
     paths:
       - build/
@@ -37,7 +41,7 @@ deploy:
   image: docker:latest
   script:
     - echo "Запуск скрипта развертывания..."
-    - docker stack deploy -c dev.yml --with-registry-auth users_stack
+    - docker stack deploy -c dev.yml --with-registry-auth crm_mind_stack
   tags:
     - dev
   only:

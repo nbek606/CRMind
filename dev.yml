@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   frontend:
+    image: front-$IMAGE_NAME-$TAG
     command: ["npm", "run", "build"]
     tty: true
     build: .
