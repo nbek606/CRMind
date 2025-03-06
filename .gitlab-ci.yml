@@ -23,7 +23,6 @@ build:dev:
   script:
     - npm ci
     - npm run build
-    - echo $CI_REGISTRY_IMAGE
     - docker build -t $CI_REGISTRY_IMAGE:frontend-$TAG .
     - docker push $CI_REGISTRY_IMAGE:frontend-$TAG
   artifacts:
