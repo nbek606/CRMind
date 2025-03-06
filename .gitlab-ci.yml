@@ -28,8 +28,8 @@ build:
   script:
     - npm ci
     - npm run build
-    - docker build -t $CI_REGISTRY_IMAGE:front-$TAG .
-    - docker push $CI_REGISTRY_IMAGE:front-$TAG
+    - docker build -t $CI_REGISTRY_IMAGE:front .
+    - docker push $CI_REGISTRY_IMAGE:front
 
   artifacts:
     paths:
