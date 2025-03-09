@@ -1,1 +1,1 @@
-export {schema} from "./constants.ts";
+export {schema} from "./shemas.ts";

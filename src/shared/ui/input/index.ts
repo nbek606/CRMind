@@ -1,2 +1,1 @@
-export {BaseTextField} from './ui/BaseTextField.tsx';
-export {PasswordTextField} from './ui/PasswordTextField.tsx';
+export {BaseFormInput} from "./ui/BaseFormInput.tsx";

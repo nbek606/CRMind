@@ -24,10 +24,12 @@
       align-items: center;
       gap: 40px;
 
-      svg {
-        color: $primary-color;
-        font-size: 30px;
-        cursor: pointer;
+      .anticon-arrow-left {
+        svg {
+          color: $primary-color;
+          font-size: 25px;
+          cursor: pointer;
+        }
       }
   }
 }
