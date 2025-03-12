@@ -9,6 +9,7 @@ import {BaseSelect} from "@/shared/ui/select";
 import {useAppDispatch, useAppSelector} from "@/app/hooks/redux.ts";
 import {ArrowLeftOutlined} from "@ant-design/icons";
 import {changeSuccess, fetchRegisterApi} from "@/features/register";
+import {Alert} from "antd";
 
 interface IRegisterFormProps {
     onShowAuth: () => void;
@@ -17,7 +18,7 @@ interface IRegisterFormProps {
 export const RegisterForm: FC<IRegisterFormProps> = memo(({onShowAuth}) => {
     const {loadCountries} = useBaseSettingCountries()
     const countries = useAppSelector(state => state.baseSettingCountries.list)
-    const { success, isLoading } = useAppSelector(state => state.register)
+    const { success, isLoading, error } = useAppSelector(state => state.register)
 
     const dispatch = useAppDispatch()
 
@@ -147,6 +148,10 @@ export const RegisterForm: FC<IRegisterFormProps> = memo(({onShowAuth}) => {
                             disabled={!isValidForm}
                         />
                     </div>
+                    <br/>
+                    {
+                        !error || <Alert message={error} type="error" showIcon/>
+                    }
                 </form>
             </div>
         </div>

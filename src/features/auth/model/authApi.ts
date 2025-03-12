@@ -2,7 +2,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {axiosInstance} from "@/shared/api";
 import {IAuthBody} from "./authTypes.ts";
-import {AUTH_ERROR_MESSAGE} from "@/shared/constant/message.ts";
+import {AUTH_ERROR_MESSAGE} from "@/shared/constant";
 import {AxiosError} from "axios";
 
 

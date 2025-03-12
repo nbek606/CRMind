@@ -1,17 +1,21 @@
-import { ROUTES } from "@/shared/constant/routes.ts";
-import { lazy } from "react";
+import { HomePage } from '@/pages/home';
+import { AboutPage } from "@/pages/about";
+import { LoginPage } from "@/pages/login";
 
 export const routesList = [
     {
-        path: ROUTES.HOME,
-        element: lazy(() => import('@/pages/home'))
+        path: '/',
+        auth: true,
+        element: HomePage
     },
     {
-        path: ROUTES.ABOUT,
-        element: lazy(() => import('@/pages/about'))
+        path: '/about',
+        auth: true,
+        element: AboutPage
     },
     {
-        path: ROUTES.LOGIN,
-        element: lazy(() => import('@/pages/login'))
+        path: '/login',
+        auth: false,
+        element: LoginPage
     }
-];
+]
