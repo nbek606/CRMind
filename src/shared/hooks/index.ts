@@ -1,2 +1,2 @@
-export {useBaseSettingCountries} from "./baseSettingHooks.ts"
+export {useBaseSettingCountries, useBaseSettingTimeZone} from "./baseSettingHooks.ts"
 export { useCustomForm } from "./formHooks.ts"

@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import {FC} from 'react';
+import {FC, ReactNode} from 'react';
 import './BaseButton.scss';
 import {SyncOutlined } from "@ant-design/icons";
 
@@ -8,7 +8,9 @@ interface IBaseButton {
     disabled?: boolean,
     onClick?: (test: string) => void;
     type?: 'button' | 'submit',
-    loading?: boolean
+    loading?: boolean,
+    width?: number | string,
+    icon?: ReactNode
 }
 
 export const BaseButton: FC<IBaseButton> = (
@@ -17,15 +19,19 @@ export const BaseButton: FC<IBaseButton> = (
         disabled = false,
         onClick,
         type='button',
-        loading = false
+        loading = false,
+        width = '100%',
+        icon
     }) => {
         return (
             <div className="base__button">
                 <Button
+                    style={{ width: width }}
                     disabled={disabled}
                     onClick={() => onClick ? onClick('type'): () => {}}
                     htmlType={type}
                     loading={loading && { icon: <SyncOutlined spin /> }}
+                    icon={icon}
                 >
                     {title}
                 </Button>

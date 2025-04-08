@@ -1,0 +1,18 @@
+.settings__users-widget__header {
+  height: 65px;
+  width: 100%;
+  border-bottom: 1px solid #dadcdd;
+  background-color: $white-color;
+
+  &-wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 30px;
+  }
+
+  &-buttons {
+
+  }
+}

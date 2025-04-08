@@ -3,6 +3,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import {useAppSelector} from "@/app/hooks/redux.ts";
 import {ROUTES} from "@/shared/constant/routes.ts";
 import {CrmSelection} from "@/features/crm-selection";
+import {Sidebar} from "@/features/sidebar";
 
 interface ProtectedRouteProps {
     children: ReactNode,
@@ -30,7 +31,10 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children, path }) => {
             {
                 !selectedCrmId && path !== ROUTES.LOGIN ?
                     <CrmSelection></CrmSelection>
-                : children
+                    : <div className="page__content">{children}</div>
+            }
+            {
+                selectedCrmId && <Sidebar />
             }
         </>
     );
