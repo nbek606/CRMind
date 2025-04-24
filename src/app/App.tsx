@@ -1,11 +1,12 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {routesList} from "./routes";
 import {ProtectedRoute} from "@/shared/ui/redirect";
+import './App.scss';
 
 function App() {
   return (
      <BrowserRouter>
-         <div className="container">
+         <div className="main">
             <Routes>
                 {
                     routesList.map(route =>

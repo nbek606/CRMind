@@ -1,15 +1,12 @@
 import './AuthForm.scss';
-import {BaseTextField, PasswordTextField} from "@/shared/ui/input";
 import {BaseTitle} from "@/shared/ui/label";
 import {BaseButton} from "@/shared/ui/button";
-import {useForm} from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {schema} from "@/features/auth/helpers/constants.ts";
-import {z} from "zod";
 import {fetchAuthApi} from "../model";
 import {useAppDispatch, useAppSelector} from "@/app/hooks/redux.ts";
-import {Alert} from "@mui/material";
-import {FC} from "react";
+import {Alert} from "antd";
+import {FC, FormEvent} from "react";
+import {useInput} from "@/shared/hooks/inputHooks.ts";
+import {BaseFormInput} from "@/shared/ui/input";
 
 interface IAuthFormProps {
     onShowRegister: () => void
@@ -18,18 +15,12 @@ interface IAuthFormProps {
 export const AuthForm: FC<IAuthFormProps> = ({ onShowRegister })=> {
     const dispatch = useAppDispatch()
     const {error, isLoading} = useAppSelector(state => state.auth)
-    const {
-        register,
-        handleSubmit,
-        formState: {errors},
-    } = useForm<FormData>({
-        resolver: zodResolver(schema)
-    })
-
-    type FormData = z.infer<typeof schema>
-
-    const onSubmit = (data: FormData) => {
-        dispatch(fetchAuthApi(data))
+    const username = useInput('', { isEmail: true })
+    const password = useInput('', { isEmpty: true })
+{}
+    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        dispatch(fetchAuthApi({ username: username.value, password: password.value }))
     }
 
     return (
@@ -46,32 +37,34 @@ export const AuthForm: FC<IAuthFormProps> = ({ onShowRegister })=> {
                         </a>
                     </div>
                 </div>
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                >
-                    <BaseTextField
-                        label="Email"
-                        {...register("username")}
-                        error={!!errors.username}
-                        helperText={errors.username?.message}
+                <form onSubmit={onSubmit}>
+                    <BaseFormInput
+                        placeholder="Email*"
+                        value={username.value}
+                        onChange={(e) => username.onChange(e)}
+                        onBLur={() => username.onBlur()}
+                        error={username.isEmail && username.isDirty}
+                        errorMessage={username.message.error}
                     />
-                    <PasswordTextField
-                        label="Пароль"
-                        {...register("password")}
-                        error={!!errors.password}
-                        helperText={errors.password?.message}
+                    <BaseFormInput
+                        placeholder="password*"
+                        value={password.value}
+                        onChange={(e) => password.onChange(e)}
+                        onBLur={() => password.onBlur()}
+                        error={password.isEmail && password.isDirty}
+                        errorMessage={password.message.error}
+                        type="password"
                     />
-
                     <BaseButton
                         title="Войти"
-                        type="submit"
+                        htmlType="submit"
+                        type="primary"
                         loading={isLoading}
+                        disabled={!username.inputValid || !password.inputValid}
                     />
+                    <br/>
                     {
-                        error &&
-                        <Alert severity="error">
-                            {error}
-                        </Alert>
+                        !error || <Alert message={error} type="error" showIcon/>
                     }
                 </form>
             </div>

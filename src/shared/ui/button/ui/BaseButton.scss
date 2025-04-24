@@ -1,47 +1,50 @@
 .base__button {
   width: 100%;
 
-  .MuiButtonBase-root {
+
+  .ant-btn-primary {
+    height: 45px;
     width: 100%;
-    font-size: 16px;
-    padding: 14px 30px;
+    font-size: 14px;
     font-weight: 600;
-    font-family: $base-font-family;
-    border-radius: 4px;
-  }
-
-  .MuiButton-contained {
+    color: $white-color;
+    text-transform: uppercase;
+    border-color: $primary-color;
     background-color: $primary-color;
-    border-color: $primary-color;
 
-    &:disabled {
-      background-color: $light-grey-color;
-      color: $dark-grey-color;
+    &:hover {
+      background: $white-color !important;
+      color: $primary-color !important;
+    }
+
+    &:disabled, &:disabled:hover{
+      background-color: $light-grey-color !important;
+      color: $dark-grey-color !important;
+    }
+
+    &:hover {
+      background: $primary-color !important;
+      color: $light-grey-color !important;
     }
   }
 
-  .MuiButton-outlined {
+  .ant-btn-variant-outlined {
+    height: 45px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
     color: $primary-color;
+    text-transform: uppercase;
     border-color: $primary-color;
 
-    &:disabled {
-      color: $dark-grey-color;
-      border-color: $dark-grey-color;
+    &:disabled, &:disabled:hover{
+      background-color: $light-grey-color !important;
+      color: $dark-grey-color !important;
     }
-  }
 
-  .MuiButton-outlinedError {
-    color: $red-color;
-    border-color: $red-color;
-  }
-
-  .MuiButton-containedSuccess {
-    border-color: $green-color;
-    background-color: $green-color;
-  }
-
-  .MuiButton-containedError {
-    border-color: $red-color;
-    background-color: $red-color;
+    &:hover {
+      background: $primary-color !important;
+      color: $light-grey-color !important;
+    }
   }
 }

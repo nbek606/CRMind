@@ -1,0 +1,19 @@
+body {
+  background-color: $grey-color;
+}
+
+a {
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.main {
+  position: relative;
+  display: flex;
+  background: $grey-color;
+}
+
+.page__content {
+  margin-left: 65px;
+  width: 100%;
+}

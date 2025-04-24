@@ -1,21 +1,34 @@
-import { ROUTES } from "@/shared/constant/routes.ts";
-import { lazy } from "react";
+import { HomePage } from '@/pages/home';
+import { AboutPage } from "@/pages/about";
+import { LoginPage } from "@/pages/login";
+import { DealsPage } from "@/pages/deals";
+import {ROUTES} from "@/shared/constant/routes.ts";
+import {SettingsPage} from "@/pages/settings/ui/SettingsPage.tsx";
 
 export const routesList = [
     {
         path: ROUTES.HOME,
-        element: lazy(() => import('@/pages/home'))
+        auth: true,
+        element: HomePage
     },
     {
         path: ROUTES.ABOUT,
-        element: lazy(() => import('@/pages/about'))
+        auth: true,
+        element: AboutPage
     },
     {
         path: ROUTES.LOGIN,
-        element: lazy(() => import('@/pages/login'))
+        auth: false,
+        element: LoginPage
     },
     {
-        path: ROUTES.REGISTER,
-        element: lazy(() => import('@/pages/register'))
+        path: ROUTES.DEALS,
+        auth: true,
+        element: DealsPage
+    },
+    {
+        path: ROUTES.SETTINGS,
+        auth: true,
+        element: SettingsPage
     }
-];
+]

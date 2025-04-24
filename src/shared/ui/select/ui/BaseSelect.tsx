@@ -1,37 +1,44 @@
 import './BaseSelect.scss';
 import {ICountry} from "@/shared/model";
-
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
-import {FC, memo} from "react";
+import {Select} from "antd";
+import {memo, useMemo, FC} from "react";
 
 interface IBaseSelectProps {
-    items: ICountry[],
-    value?: string,
-    label?: string
+    items: ICountry[];
+    value?: number | null;
+    label?: string;
+    selectLabelName?: string,
+    selectValueName?: string,
+    placeholder?: string,
+    onChange?: (e: number) => void;
 }
 
-export const BaseSelect: FC<IBaseSelectProps> = memo(({items, value, label}) => {
+export const BaseSelect: FC<IBaseSelectProps> = memo((
+    {
+        label,
+        value,
+        items,
+        selectValueName = "id",
+        selectLabelName = "name",
+        placeholder,
+        ...rest
+    }) => {
+
+    // Переобразуем items в options для select
+    const options = useMemo(() => items.map(item => ({
+        label: item[selectLabelName as keyof ICountry],
+        value: item[selectValueName as keyof ICountry]
+    })), [items, selectLabelName, selectValueName])
+
     return (
         <div className="base__select">
-            <FormControl>
-                <InputLabel>{label}</InputLabel>
-                <Select
-                    variant="outlined"
-                    value={value}
-                    label={label}
-                >
-                    {
-                        items.map(item =>
-                            <MenuItem
-                                value={item.id}
-                                key={item.id}
-                            >
-                                {item.name}
-                            </MenuItem>
-                        )
-                    }
-                </Select>
-            </FormControl>
+            {label && <label className="base__select-label">{label}</label>}
+            <Select
+                placeholder={placeholder}
+                value={ value }
+                options={options}
+                {...rest}
+            />
         </div>
-    )
-})
+    );
+});

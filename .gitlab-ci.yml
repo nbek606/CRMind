@@ -2,39 +2,30 @@ before_script:
   - docker login --username $CI_REGISTRY_USER --password $CI_REGISTRY_PASSWORD
 
 stages:
-  - install
   - build
   - deploy
-
-cache:
-  key: npm-cache
-  paths:
-    - node_modules/
 
 variables:
   TAG: $CI_COMMIT_REF_SLUG-$CI_PIPELINE_ID-$CI_COMMIT_SHORT_SHA
 
-install:
-  stage: install
-  image: node:18
-  script:
-    - npm ci
-  artifacts:
-    paths:
-      - node_modules/
-
-build:
+build:dev:
   stage: build
-  image: node:18
   script:
-    - npm run build
-  artifacts:
-    paths:
-      - build/
+    - docker build -t $CI_REGISTRY_IMAGE:frontend-$TAG .
+    - docker push $CI_REGISTRY_IMAGE:frontend-$TAG
+  tags:
+    - dev
+  only:
+    - dev
+  environment: dev
 
 deploy:
   stage: deploy
-  image: docker:latest
   script:
-    - echo "Запуск скрипта развертывания...
-    - docker
+    - echo "Запуск скрипта развертывания..."
+    - docker stack deploy -c dev.yml --with-registry-auth frontend_stack
+  tags:
+    - dev
+  only:
+    - dev
+  environment: dev

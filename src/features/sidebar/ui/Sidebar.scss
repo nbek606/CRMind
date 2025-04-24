@@ -1,0 +1,44 @@
+.sidebar {
+  position: fixed;
+  height: 100vh;
+  background-color: $sidebar-color;
+  width: 65px;
+  padding-top: 0;
+
+  &__active {
+    width: 200px;
+  }
+
+  &__icon {
+    color: red;
+    width: 30px;
+    align-items: center;
+    display: flex;
+
+    svg {
+      color: red;
+
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px 0px;
+    cursor: pointer;
+
+    &-active {
+      background-color: $light-primary-color;
+    }
+
+    &-title{
+      font-size: 11px;
+      font-family: $base-font-family;
+      color: $light-grey-color;
+      margin: 0;
+      height: 100%;
+      align-items: center;
+    }
+  }
+}

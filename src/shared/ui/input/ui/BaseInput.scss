@@ -1,0 +1,36 @@
+.base__input {
+  &-label {
+    display: block;
+    font-family: $base-font-family;
+    font-size: 14px;
+    padding-bottom: 10px;
+    font-weight: 600;
+    color: $black-color;
+  }
+
+  .ant-input, .ant-input-password {
+    padding: 8px 10px;
+    background-color: $light-grey-color;
+    font-family: $base-font-family;
+  }
+
+  .ant-input.ant-input-status-error {
+    border-color: $error-color;
+  }
+
+  &-error__message{
+    height: 15px;
+    margin: 0;
+    font-size: 13px;
+    color: $error-color;
+    padding-bottom: 4px;
+
+    .visible {
+      visibility: visible;
+    }
+
+    .hidden {
+      visibility: hidden;
+    }
+  }
+}

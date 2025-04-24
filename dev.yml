@@ -1,0 +1,8 @@
+services:
+  frontend:
+    image: $CI_REGISTRY_IMAGE:frontend-$TAG
+    env_file:
+      - $env
+    ports:
+      - "3010:80"
+    tty: true

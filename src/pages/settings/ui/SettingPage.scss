@@ -1,0 +1,23 @@
+.settings__page {
+  width: 100%;
+  background-color: $grey-color;
+  box-sizing: border-box;
+  min-height: 100vw;
+  padding: 30px;
+
+  &-wrap {
+    background-color: $white-color;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  &-title {
+    font-size: 24px;
+    font-family: $base-font-family;
+  }
+
+  &-content {
+    position: relative;
+    min-height: 400px;
+  }
+}
