@@ -31,7 +31,8 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children, path }) => {
             {
                 !selectedCrmId && path !== ROUTES.LOGIN ?
                     <CrmSelection></CrmSelection>
-                    : <div className="page__content">{children}</div>
+                    : ROUTES.LOGIN === path ? <>{children}</> :
+                        <div className="page__content">{children}</div>
             }
             {
                 selectedCrmId && <Sidebar />

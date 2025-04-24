@@ -57,7 +57,8 @@ export const AuthForm: FC<IAuthFormProps> = ({ onShowRegister })=> {
                     />
                     <BaseButton
                         title="Войти"
-                        type="submit"
+                        htmlType="submit"
+                        type="primary"
                         loading={isLoading}
                         disabled={!username.inputValid || !password.inputValid}
                     />

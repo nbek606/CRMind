@@ -2,22 +2,23 @@ import './BaseTab.scss';
 import {TBaseTab} from "@/shared/model";
 import {FC} from "react";
 
-import {NavLink, useLocation} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 interface IBaseTabItemProps {
-    item: TBaseTab
+    item: TBaseTab,
+    activeTab: string,
+    onChangeActiveTab: (tab: string) => void
 }
 
-export const BaseTabItem: FC<IBaseTabItemProps> = ({ item }) => {
-    const location = useLocation()
-
+export const BaseTabItem: FC<IBaseTabItemProps> = ({ item, activeTab, onChangeActiveTab }) => {
     return (
-        <div
-            className={`base__tab-item ${location.pathname === item.link && 'base__tab-item__active'}`}
-        >
-            <NavLink to={item.link}>
-                {item.title}
-            </NavLink>
-        </div>
+        <NavLink to={item.link} onClick={() => onChangeActiveTab(item.link)}>
+            <div
+                className={`base__tab-item ${ activeTab === item.link && 'base__tab-item__active'}`}
+            >
+
+                    {item.title}
+            </div>
+        </NavLink>
     )
 }

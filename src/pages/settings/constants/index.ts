@@ -1,6 +1,6 @@
 import {SETTINGS_LINKS} from "@/shared/constant/settings.ts";
 import {GeneralSettingsWidget} from "@/widgets/general-settings";
-import {SettingsUsersWidget} from "@/widgets/settings-users"
+import {SettingsUserWidget} from "@/widgets/settings-users"
 
 export const settingsRoute= [
     {
@@ -13,6 +13,6 @@ export const settingsRoute= [
         title: 'Пользователи',
         path: SETTINGS_LINKS.USERS.path,
         link: SETTINGS_LINKS.USERS.link,
-        element: SettingsUsersWidget
+        element: SettingsUserWidget
     }
 ]

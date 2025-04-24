@@ -1,14 +1,41 @@
 .base__button {
   width: 100%;
 
+
+  .ant-btn-primary {
+    height: 45px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: $white-color;
+    text-transform: uppercase;
+    border-color: $primary-color;
+    background-color: $primary-color;
+
+    &:hover {
+      background: $white-color !important;
+      color: $primary-color !important;
+    }
+
+    &:disabled, &:disabled:hover{
+      background-color: $light-grey-color !important;
+      color: $dark-grey-color !important;
+    }
+
+    &:hover {
+      background: $primary-color !important;
+      color: $light-grey-color !important;
+    }
+  }
+
   .ant-btn-variant-outlined {
     height: 45px;
     width: 100%;
     font-size: 14px;
     font-weight: 600;
-    background-color: $primary-color;
-    color: $white-color;
+    color: $primary-color;
     text-transform: uppercase;
+    border-color: $primary-color;
 
     &:disabled, &:disabled:hover{
       background-color: $light-grey-color !important;

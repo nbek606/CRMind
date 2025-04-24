@@ -143,7 +143,8 @@ export const RegisterForm: FC<IRegisterFormProps> = memo(({onShowAuth}) => {
                         />
                         <BaseButton
                             title="Зарегистрироваться"
-                            type="submit"
+                            htmlType="submit"
+                            type="primary"
                             loading={isLoading}
                             disabled={!isValidForm}
                         />

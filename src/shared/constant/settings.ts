@@ -3,12 +3,20 @@ export const SETTINGS_LINKS = {
         link: '/settings/general-settings',
         path: 'general-settings'
     },
-    ROLE: {
-        link: '/settings/role',
-        path:`role`
-    },
     USERS: {
         link: '/settings/users',
-        path: 'users'
+        path: 'users/*'
     }
 }
+
+export const SETTINGS_USER_LINKS = {
+    GROUPS: {
+        link: '/settings/users/groups',
+        path: 'groups'
+    },
+    ROLES: {
+        link: '/settings/users/roles',
+        path: 'roles'
+    }
+}
+

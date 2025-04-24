@@ -6,7 +6,7 @@ import {FC} from "react";
 
 interface IRadioButtonGroupProps {
     options: ICrm[],
-    value: number | null,
+    value?: number | null,
     onChange: (value: number) => void
 }
 

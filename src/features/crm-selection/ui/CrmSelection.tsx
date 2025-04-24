@@ -1,16 +1,14 @@
 import './CrmSelection.scss';
 import {useAppDispatch, useAppSelector} from "@/app/hooks/redux.ts";
-import {useEffect, useLayoutEffect, useState} from "react";
+import {useEffect, useLayoutEffect} from "react";
 import {fetchCrmApi} from "@/shared/model/crm";
 import {BaseTitle} from "@/shared/ui/label";
 import {RadioButtonGroup} from "@/shared/ui/radio";
-import {BaseButton} from "@/shared/ui/button";
 import {changeSelectedCrmId} from "@/shared/model/crm/crmSlice.ts";
 
 export const CrmSelection = () => {
     const { crmList, isLoading, selectedCrmId: crmId } = useAppSelector(state => state.crmSelection)
     const {token} = useAppSelector(state => state.auth)
-    const [selectedCrmId, setSelectedCrmId] = useState<number | null>(null)
     const dispatch = useAppDispatch()
 
     useLayoutEffect(() => {
@@ -20,13 +18,13 @@ export const CrmSelection = () => {
     }, [crmId]);
 
     useEffect(() => {
-        if (crmList.length > 0) {
-            setSelectedCrmId(crmList[0]?.id || null)
+        if (crmList.length === 1) {
+            dispatch(changeSelectedCrmId(crmList[0].id))
         }
     }, [crmList]);
 
-    const onSelectedCrm = () => {
-        dispatch(changeSelectedCrmId(selectedCrmId))
+    const onSelectedCrm = (crmId: number) => {
+        dispatch(changeSelectedCrmId(crmId))
     }
 
     return (
@@ -40,16 +38,9 @@ export const CrmSelection = () => {
                         {
                             <RadioButtonGroup
                                 options={crmList}
-                                value={selectedCrmId}
-                                onChange={(v) => setSelectedCrmId(v)}
+                                onChange={(v) => onSelectedCrm(v)}
                             />
                         }
-                    </div>
-                    <div className="crm__selection-btn">
-                        <BaseButton
-                            title="Далее"
-                            onClick={() => onSelectedCrm()}
-                        />
                     </div>
                 </div>
             }

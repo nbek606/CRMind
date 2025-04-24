@@ -8,7 +8,6 @@
   &-wrap {
     background-color: $white-color;
     border-radius: 10px;
-    min-height: 400px;
     box-sizing: border-box;
   }
 
@@ -18,6 +17,7 @@
   }
 
   &-content {
-
+    position: relative;
+    min-height: 400px;
   }
 }

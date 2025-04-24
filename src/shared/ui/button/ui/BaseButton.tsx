@@ -7,10 +7,11 @@ interface IBaseButton {
     title: string,
     disabled?: boolean,
     onClick?: (test: string) => void;
-    type?: 'button' | 'submit',
+    htmlType?: 'button' | 'submit',
     loading?: boolean,
     width?: number | string,
-    icon?: ReactNode
+    icon?: ReactNode,
+    type?: 'primary' | 'default'
 }
 
 export const BaseButton: FC<IBaseButton> = (
@@ -18,10 +19,11 @@ export const BaseButton: FC<IBaseButton> = (
         title,
         disabled = false,
         onClick,
-        type='button',
+        htmlType = 'button',
         loading = false,
         width = '100%',
-        icon
+        icon,
+        type = 'default'
     }) => {
         return (
             <div className="base__button">
@@ -29,9 +31,10 @@ export const BaseButton: FC<IBaseButton> = (
                     style={{ width: width }}
                     disabled={disabled}
                     onClick={() => onClick ? onClick('type'): () => {}}
-                    htmlType={type}
+                    htmlType={htmlType}
                     loading={loading && { icon: <SyncOutlined spin /> }}
                     icon={icon}
+                    type={type}
                 >
                     {title}
                 </Button>
